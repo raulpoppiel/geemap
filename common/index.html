@@ -2624,6 +2624,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#geemap.common.use_mkdocs" class="md-nav__link">
+    use_mkdocs()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#geemap.common.vec_area" class="md-nav__link">
     vec_area()
   </a>
@@ -4694,8 +4701,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../notebooks/112_cartoee_basemap/" class="md-nav__link">
-        112 cartoee basemap
+      <a href="../notebooks/112_cartoee_basemap_X/" class="md-nav__link">
+        112 cartoee basemap X
       </a>
     </li>
   
@@ -6933,6 +6940,13 @@
         <li class="md-nav__item">
   <a href="#geemap.common.upload_to_imgur" class="md-nav__link">
     upload_to_imgur()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geemap.common.use_mkdocs" class="md-nav__link">
+    use_mkdocs()
   </a>
   
 </li>
@@ -14068,6 +14082,9 @@ zero values, you should set the unmask value to a  non-zero value so that the ze
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USE_MKDOCS&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span> <span class="nn">geedim</span> <span class="k">as</span> <span class="nn">gd</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -14563,6 +14580,8 @@ you should set the unmask value to a  non-zero value so that the zero values are
 <span class="sd">            you should set the unmask value to a  non-zero value so that the zero values are not treated as missing data. Defaults to None.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USE_MKDOCS&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;features must be an ee.FeatureCollection.&quot;</span><span class="p">)</span>
@@ -40605,6 +40624,55 @@ In this way, I don't have to keep updating pypi and conda-forge with every minor
 
 
 
+<h2 id="geemap.common.use_mkdocs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">use_mkdocs</span><span class="p">()</span></code>
+
+
+<a href="#geemap.common.use_mkdocs" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Test if the current notebook is running in mkdocs.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>bool</code></td>
+      <td><p>True if the notebook is running in mkdocs.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>geemap/common.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">use_mkdocs</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test if the current notebook is running in mkdocs.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the notebook is running in mkdocs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;USE_MKDOCS&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
 <h2 id="geemap.common.vec_area" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">vec_area</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span></code>
 
@@ -43004,11 +43072,11 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-11-20T21:30:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-11-20</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2020-11-01T20:25:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2020-11-01</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-11-20T21:30:26+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-11-20</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2020-11-01T20:25:43+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2020-11-01</span>
       
     
   </small>
