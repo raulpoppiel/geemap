@@ -3364,6 +3364,34 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/127_create_legend/" class="md-nav__link">
+        127 create legend
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/128_add_widget/" class="md-nav__link">
+        128 add widget
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -6796,6 +6824,15 @@ Map            (<span title="folium.folium.Map">Map</span>)
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">base64</span>
 
+        <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;bottomleft&quot;</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;bottomright&quot;</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;topleft&quot;</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;topright&quot;</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
                 <span class="n">image</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
@@ -6822,14 +6859,32 @@ Map            (<span title="folium.folium.Map">Map</span>)
 <span class="sd">            position (str, optional): The position of the widget. Defaults to &quot;bottomright&quot;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">figure</span>
+        <span class="kn">import</span> <span class="nn">base64</span>
+        <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
         <span class="n">allowed_positions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;topleft&quot;</span><span class="p">,</span> <span class="s2">&quot;topright&quot;</span><span class="p">,</span> <span class="s2">&quot;bottomleft&quot;</span><span class="p">,</span> <span class="s2">&quot;bottomright&quot;</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_positions</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;position must be one of </span><span class="si">{</span><span class="n">allowed_positions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">widget</span> <span class="o">=</span> <span class="n">CustomControl</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
-            <span class="n">widget</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">widget</span> <span class="o">=</span> <span class="n">CustomControl</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">):</span>
+                <span class="n">buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+                <span class="n">content</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+                <span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">b64_content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+                <span class="n">widget</span> <span class="o">=</span> <span class="n">CustomControl</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;img src=&quot;data:image/png;base64,</span><span class="si">{</span><span class="n">b64_content</span><span class="si">}</span><span class="s2">&quot;&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+                    <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The content must be a string or a matplotlib figure&quot;</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error adding widget: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -8805,6 +8860,15 @@ the percentage ranging from 0 to 100, starting from the lower-left corner. Defau
 <span class="sd">            the percentage ranging from 0 to 100, starting from the lower-left corner. Defaults to (0, 0).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">base64</span>
+
+    <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;bottomleft&quot;</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;bottomright&quot;</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;topleft&quot;</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">&quot;topright&quot;</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
@@ -12246,14 +12310,32 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 <span class="sd">        position (str, optional): The position of the widget. Defaults to &quot;bottomright&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">figure</span>
+    <span class="kn">import</span> <span class="nn">base64</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
     <span class="n">allowed_positions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;topleft&quot;</span><span class="p">,</span> <span class="s2">&quot;topright&quot;</span><span class="p">,</span> <span class="s2">&quot;bottomleft&quot;</span><span class="p">,</span> <span class="s2">&quot;bottomright&quot;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_positions</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;position must be one of </span><span class="si">{</span><span class="n">allowed_positions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">widget</span> <span class="o">=</span> <span class="n">CustomControl</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
-        <span class="n">widget</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">CustomControl</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">):</span>
+            <span class="n">buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+            <span class="n">content</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+            <span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">b64_content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">CustomControl</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;img src=&quot;data:image/png;base64,</span><span class="si">{</span><span class="n">b64_content</span><span class="si">}</span><span class="s2">&quot;&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+                <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The content must be a string or a matplotlib figure&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error adding widget: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

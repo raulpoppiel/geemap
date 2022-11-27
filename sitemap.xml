@@ -346,6 +346,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://geemap.org/notebooks/127_create_legend/</loc>
+         <lastmod>2022-11-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://geemap.org/notebooks/128_add_widget/</loc>
+         <lastmod>2022-11-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://geemap.org/notebooks/12_zonal_statistics/</loc>
          <lastmod>2022-11-27</lastmod>
          <changefreq>daily</changefreq>
