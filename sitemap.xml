@@ -356,6 +356,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://geemap.org/notebooks/129_vector_to_gif/</loc>
+         <lastmod>2022-11-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://geemap.org/notebooks/12_zonal_statistics/</loc>
          <lastmod>2022-11-29</lastmod>
          <changefreq>daily</changefreq>
