@@ -366,6 +366,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://geemap.org/notebooks/130_print_objects/</loc>
+         <lastmod>2022-12-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://geemap.org/notebooks/13_zonal_statistics_by_group/</loc>
          <lastmod>2022-12-01</lastmod>
          <changefreq>daily</changefreq>
