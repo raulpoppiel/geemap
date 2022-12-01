@@ -9363,10 +9363,13 @@ TitilerEndpoint        </code>
 <span class="sd">        object: A titiler endpoint.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">titiler_endpoint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TITILER_ENDPOINT&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;planetary-computer&quot;</span><span class="p">:</span>
-            <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">PlanetaryComputerEndpoint</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TITILER_ENDPOINT&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TITILER_ENDPOINT&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">titiler_endpoint</span> <span class="o">==</span> <span class="s2">&quot;planetary-computer&quot;</span><span class="p">:</span>
+                <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">PlanetaryComputerEndpoint</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">TitilerEndpoint</span><span class="p">()</span>
+            <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://titiler.xyz&quot;</span>
     <span class="k">elif</span> <span class="n">titiler_endpoint</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;planetary-computer&quot;</span><span class="p">,</span> <span class="s2">&quot;pc&quot;</span><span class="p">]:</span>
         <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">PlanetaryComputerEndpoint</span><span class="p">()</span>
 
@@ -10094,7 +10097,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_bands" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_bands</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_bands</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_bands" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10124,7 +10127,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>timeout</code></td>
@@ -10151,7 +10154,7 @@ interval : boolean (default False)
 </table>
         <details class="quote">
           <summary>Source code in <code>geemap/common.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_bands</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_bands</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get band names of a Cloud Optimized GeoTIFF (COG).</span>
 
 <span class="sd">    Args:</span>
@@ -10163,6 +10166,7 @@ interval : boolean (default False)
 <span class="sd">        list: A list of band names</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">titiler_endpoint</span><span class="si">}</span><span class="s2">/cog/info&quot;</span><span class="p">,</span>
@@ -10187,7 +10191,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_bounds" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_bounds" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10217,7 +10221,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>timeout</code></td>
@@ -10244,7 +10248,7 @@ interval : boolean (default False)
 </table>
         <details class="quote">
           <summary>Source code in <code>geemap/common.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get the bounding box of a Cloud Optimized GeoTIFF (COG).</span>
 
 <span class="sd">    Args:</span>
@@ -10256,6 +10260,7 @@ interval : boolean (default False)
 <span class="sd">        list: A list of values representing [left, bottom, right, top]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -10280,7 +10285,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_center" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_center" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10310,7 +10315,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
   </tbody>
 </table>
@@ -10331,7 +10336,7 @@ interval : boolean (default False)
 </table>
         <details class="quote">
           <summary>Source code in <code>geemap/common.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_center</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get the centroid of a Cloud Optimized GeoTIFF (COG).</span>
 
 <span class="sd">    Args:</span>
@@ -10342,6 +10347,7 @@ interval : boolean (default False)
 <span class="sd">        tuple: A tuple representing (longitude, latitude)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">bounds</span> <span class="o">=</span> <span class="n">cog_bounds</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">center</span> <span class="o">=</span> <span class="p">((</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># (lat, lon)</span>
@@ -10359,7 +10365,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_info" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_info</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">return_geojson</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_info</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_geojson</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_info" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10389,7 +10395,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>timeout</code></td>
@@ -10417,7 +10423,7 @@ interval : boolean (default False)
         <details class="quote">
           <summary>Source code in <code>geemap/common.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_info</span><span class="p">(</span>
-    <span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span> <span class="n">return_geojson</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_geojson</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get band statistics of a Cloud Optimized GeoTIFF (COG).</span>
 
@@ -10430,6 +10436,7 @@ interval : boolean (default False)
 <span class="sd">        list: A dictionary of band info.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">info</span> <span class="o">=</span> <span class="s2">&quot;info&quot;</span>
     <span class="k">if</span> <span class="n">return_geojson</span><span class="p">:</span>
@@ -10457,7 +10464,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_mosaic" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_mosaic</span><span class="p">(</span><span class="n">links</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;anonymous&#39;</span><span class="p">,</span> <span class="n">layername</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_mosaic</span><span class="p">(</span><span class="n">links</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;anonymous&#39;</span><span class="p">,</span> <span class="n">layername</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_mosaic" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10487,7 +10494,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>username</code></td>
@@ -10555,7 +10562,7 @@ interval : boolean (default False)
           <summary>Source code in <code>geemap/common.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_mosaic</span><span class="p">(</span>
     <span class="n">links</span><span class="p">,</span>
-    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span>
+    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="s2">&quot;anonymous&quot;</span><span class="p">,</span>
     <span class="n">layername</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -10581,6 +10588,7 @@ interval : boolean (default False)
 <span class="sd">        str: The tile URL for the COG mosaic.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">layername</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">layername</span> <span class="o">=</span> <span class="s2">&quot;layer_&quot;</span> <span class="o">+</span> <span class="n">random_string</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
@@ -10631,7 +10639,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_mosaic_from_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_mosaic_from_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">skip_rows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;anonymous&#39;</span><span class="p">,</span> <span class="n">layername</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_mosaic_from_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">skip_rows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;anonymous&#39;</span><span class="p">,</span> <span class="n">layername</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_mosaic_from_file" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10667,7 +10675,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>username</code></td>
@@ -10715,7 +10723,7 @@ interval : boolean (default False)
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_mosaic_from_file</span><span class="p">(</span>
     <span class="n">filepath</span><span class="p">,</span>
     <span class="n">skip_rows</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span>
+    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">username</span><span class="o">=</span><span class="s2">&quot;anonymous&quot;</span><span class="p">,</span>
     <span class="n">layername</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -10738,6 +10746,7 @@ interval : boolean (default False)
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">urllib</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -10767,7 +10776,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_pixel_value" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_pixel_value</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">bidx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_pixel_value</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">bidx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_pixel_value" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10815,7 +10824,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint, e.g., "https://titiler.xyz", "planetary-computer", "pc". Defaults to None.</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>timeout</code></td>
@@ -10847,7 +10856,7 @@ interval : boolean (default False)
     <span class="n">lat</span><span class="p">,</span>
     <span class="n">url</span><span class="p">,</span>
     <span class="n">bidx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span>
+    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
@@ -10865,6 +10874,7 @@ interval : boolean (default False)
 <span class="sd">        list: A dictionary of band info.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">url</span>
@@ -10902,7 +10912,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_stats" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_stats" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -10932,7 +10942,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>timeout</code></td>
@@ -10959,7 +10969,7 @@ interval : boolean (default False)
 </table>
         <details class="quote">
           <summary>Source code in <code>geemap/common.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get band statistics of a Cloud Optimized GeoTIFF (COG).</span>
 
 <span class="sd">    Args:</span>
@@ -10971,6 +10981,7 @@ interval : boolean (default False)
 <span class="sd">        list: A dictionary of band statistics.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">titiler_endpoint</span><span class="si">}</span><span class="s2">/cog/statistics&quot;</span><span class="p">,</span>
@@ -10994,7 +11005,7 @@ interval : boolean (default False)
 
 
 <h2 id="geemap.common.cog_tile" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s1">&#39;https://titiler.xyz&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">cog_tile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.cog_tile" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -11025,7 +11036,7 @@ interval : boolean (default False)
         <td><code>titiler_endpoint</code></td>
         <td><code>str</code></td>
         <td><p>Titiler endpoint. Defaults to "https://titiler.xyz".</p></td>
-        <td><code>&#39;https://titiler.xyz&#39;</code></td>
+        <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>timeout</code></td>
@@ -11061,7 +11072,7 @@ interval : boolean (default False)
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cog_tile</span><span class="p">(</span>
     <span class="n">url</span><span class="p">,</span>
     <span class="n">bands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="s2">&quot;https://titiler.xyz&quot;</span><span class="p">,</span>
+    <span class="n">titiler_endpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
     <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -11079,6 +11090,7 @@ interval : boolean (default False)
 <span class="sd">        tuple: Returns the COG Tile layer URL and bounds.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">titiler_endpoint</span> <span class="o">=</span> <span class="n">check_titiler_endpoint</span><span class="p">(</span><span class="n">titiler_endpoint</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">get_direct_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
     <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">url</span>
