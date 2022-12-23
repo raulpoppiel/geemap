@@ -7542,6 +7542,8 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
         <span class="n">position</span><span class="o">=</span><span class="s2">&quot;bottomright&quot;</span><span class="p">,</span>
         <span class="n">transparent_bg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">layer_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+        <span class="n">axis_off</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a matplotlib colorbar to the map</span>
@@ -7555,6 +7557,8 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 <span class="sd">            position (str, optional): Position of the colorbar on the map. It can be one of: topleft, topright, bottomleft, and bottomright. Defaults to &quot;bottomright&quot;.</span>
 <span class="sd">            transparent_bg (bool, optional): Whether to use transparent background. Defaults to False.</span>
 <span class="sd">            layer_name (str, optional): The layer name associated with the colorbar. Defaults to None.</span>
+<span class="sd">            font_size (int, optional): Font size for the colorbar. Defaults to 9.</span>
+<span class="sd">            axis_off (bool, optional): Whether to turn off the axis. Defaults to False.</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            TypeError: If the vis_params is not a dictionary.</span>
@@ -7600,9 +7604,9 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The orientation must be either horizontal or vertical.&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">:</span>
-            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.4</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.3</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">4.0</span>
+            <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">3.0</span>
 
         <span class="k">if</span> <span class="s2">&quot;width&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">width</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">]</span>
@@ -7671,9 +7675,13 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
         <span class="k">elif</span> <span class="s2">&quot;bands&quot;</span> <span class="ow">in</span> <span class="n">vis_keys</span><span class="p">:</span>
-            <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;bands&quot;</span><span class="p">])</span>
+            <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;bands&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">axis_off</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
 
         <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
         <span class="n">colormap_ctrl</span> <span class="o">=</span> <span class="n">ipyleaflet</span><span class="o">.</span><span class="n">WidgetControl</span><span class="p">(</span>
@@ -12696,7 +12704,7 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 
 
 <h3 id="geemap.geemap.Map.add_colorbar" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">add_colorbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vis_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;bottomright&#39;</span><span class="p">,</span> <span class="n">transparent_bg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">add_colorbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vis_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s1">&#39;bottomright&#39;</span><span class="p">,</span> <span class="n">transparent_bg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">layer_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">axis_off</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.geemap.Map.add_colorbar" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -12764,6 +12772,18 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
         <td><p>The layer name associated with the colorbar. Defaults to None.</p></td>
         <td><code>None</code></td>
       </tr>
+      <tr>
+        <td><code>font_size</code></td>
+        <td><code>int</code></td>
+        <td><p>Font size for the colorbar. Defaults to 9.</p></td>
+        <td><code>9</code></td>
+      </tr>
+      <tr>
+        <td><code>axis_off</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to turn off the axis. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Exceptions:</strong></p>
@@ -12813,6 +12833,8 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
     <span class="n">position</span><span class="o">=</span><span class="s2">&quot;bottomright&quot;</span><span class="p">,</span>
     <span class="n">transparent_bg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">layer_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">font_size</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+    <span class="n">axis_off</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add a matplotlib colorbar to the map</span>
@@ -12826,6 +12848,8 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 <span class="sd">        position (str, optional): Position of the colorbar on the map. It can be one of: topleft, topright, bottomleft, and bottomright. Defaults to &quot;bottomright&quot;.</span>
 <span class="sd">        transparent_bg (bool, optional): Whether to use transparent background. Defaults to False.</span>
 <span class="sd">        layer_name (str, optional): The layer name associated with the colorbar. Defaults to None.</span>
+<span class="sd">        font_size (int, optional): Font size for the colorbar. Defaults to 9.</span>
+<span class="sd">        axis_off (bool, optional): Whether to turn off the axis. Defaults to False.</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: If the vis_params is not a dictionary.</span>
@@ -12871,9 +12895,9 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The orientation must be either horizontal or vertical.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">:</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">0.4</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.3</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">4.0</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">3.0</span>
 
     <span class="k">if</span> <span class="s2">&quot;width&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
         <span class="n">width</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;width&quot;</span><span class="p">]</span>
@@ -12942,9 +12966,13 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
     <span class="k">elif</span> <span class="s2">&quot;bands&quot;</span> <span class="ow">in</span> <span class="n">vis_keys</span><span class="p">:</span>
-        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;bands&quot;</span><span class="p">])</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;bands&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">axis_off</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">font_size</span><span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
     <span class="n">colormap_ctrl</span> <span class="o">=</span> <span class="n">ipyleaflet</span><span class="o">.</span><span class="n">WidgetControl</span><span class="p">(</span>

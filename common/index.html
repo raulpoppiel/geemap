@@ -8138,7 +8138,7 @@ TitilerEndpoint        </code>
         <span class="n">m</span> <span class="o">=</span> <span class="n">arc_active_map</span><span class="p">()</span>
         <span class="n">m</span><span class="o">.</span><span class="n">addDataFromPath</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">layers</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">listLayers</span><span class="p">(</span><span class="s1">&#39;Tiled service layer&#39;</span><span class="p">)</span>
+            <span class="n">layers</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">listLayers</span><span class="p">(</span><span class="s2">&quot;Tiled service layer&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">layer</span> <span class="o">=</span> <span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">layer</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -37955,7 +37955,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
 
 
 <h2 id="geemap.common.save_colorbar" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">save_colorbar</span><span class="p">(</span><span class="n">out_fig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vis_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">label_weight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">tick_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">bg_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">save_colorbar</span><span class="p">(</span><span class="n">out_fig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vis_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">label_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">label_weight</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">tick_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">bg_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.save_colorbar" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -37984,14 +37984,14 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
       <tr>
         <td><code>width</code></td>
         <td><code>float</code></td>
-        <td><p>Width of the colorbar in inches. Default is 6.0.</p></td>
-        <td><code>6.0</code></td>
+        <td><p>Width of the colorbar in inches. Default is 4.0.</p></td>
+        <td><code>4.0</code></td>
       </tr>
       <tr>
         <td><code>height</code></td>
         <td><code>float</code></td>
-        <td><p>Height of the colorbar in inches. Default is 0.4.</p></td>
-        <td><code>0.4</code></td>
+        <td><p>Height of the colorbar in inches. Default is 0.3.</p></td>
+        <td><code>0.3</code></td>
       </tr>
       <tr>
         <td><code>vmin</code></td>
@@ -38039,7 +38039,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
         <td><code>label_size</code></td>
         <td><code>int</code></td>
         <td><p>Font size for the colorbar label. Defaults to 12.</p></td>
-        <td><code>12</code></td>
+        <td><code>10</code></td>
       </tr>
       <tr>
         <td><code>label_weight</code></td>
@@ -38051,13 +38051,13 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
         <td><code>tick_size</code></td>
         <td><code>int</code></td>
         <td><p>Font size for the colorbar tick labels. Defaults to 10.</p></td>
-        <td><code>10</code></td>
+        <td><code>8</code></td>
       </tr>
       <tr>
         <td><code>bg_color</code></td>
         <td><code>str</code></td>
-        <td><p>Background color for the colorbar. Defaults to None.</p></td>
-        <td><code>None</code></td>
+        <td><p>Background color for the colorbar. Defaults to "white".</p></td>
+        <td><code>&#39;white&#39;</code></td>
       </tr>
       <tr>
         <td><code>orientation</code></td>
@@ -38068,14 +38068,26 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
       <tr>
         <td><code>dpi</code></td>
         <td><code>float | str</code></td>
-        <td><p>The resolution in dots per inch.  If 'figure', use the figure's dpi value.. Defaults to "figure".</p></td>
+        <td><p>The resolution in dots per inch.  If 'figure', use the figure's dpi value. Defaults to "figure".</p></td>
         <td><code>&#39;figure&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>transparent</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to make the background transparent. Defaults to False.</p></td>
+        <td><code>False</code></td>
       </tr>
       <tr>
         <td><code>show_colorbar</code></td>
         <td><code>bool</code></td>
         <td><p>Whether to show the colorbar. Defaults to True.</p></td>
         <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>**kwargs</code></td>
+        <td></td>
+        <td><p>Other keyword arguments to pass to matplotlib.pyplot.savefig().</p></td>
+        <td><code>{}</code></td>
       </tr>
   </tbody>
 </table>
@@ -38098,8 +38110,8 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
           <summary>Source code in <code>geemap/common.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">save_colorbar</span><span class="p">(</span>
     <span class="n">out_fig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">width</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span>
-    <span class="n">height</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
     <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">palette</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -38107,12 +38119,13 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
     <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
     <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">label_size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">label_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">label_weight</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span>
-    <span class="n">tick_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-    <span class="n">bg_color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">tick_size</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
     <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span>
     <span class="n">dpi</span><span class="o">=</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span>
+    <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
@@ -38120,8 +38133,8 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
 
 <span class="sd">    Args:</span>
 <span class="sd">        out_fig (str): Path to the output image.</span>
-<span class="sd">        width (float): Width of the colorbar in inches. Default is 6.0.</span>
-<span class="sd">        height (float): Height of the colorbar in inches. Default is 0.4.</span>
+<span class="sd">        width (float): Width of the colorbar in inches. Default is 4.0.</span>
+<span class="sd">        height (float): Height of the colorbar in inches. Default is 0.3.</span>
 <span class="sd">        vmin (float): Minimum value of the colorbar. Default is 0.</span>
 <span class="sd">        vmax (float): Maximum value of the colorbar. Default is 1.0.</span>
 <span class="sd">        palette (list): List of colors to use for the colorbar. It can also be a cmap name, such as ndvi, ndwi, dem, coolwarm. Default is None.</span>
@@ -38132,10 +38145,12 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
 <span class="sd">        label_size (int, optional): Font size for the colorbar label. Defaults to 12.</span>
 <span class="sd">        label_weight (str, optional): Font weight for the colorbar label, can be &quot;normal&quot;, &quot;bold&quot;, etc. Defaults to &quot;normal&quot;.</span>
 <span class="sd">        tick_size (int, optional): Font size for the colorbar tick labels. Defaults to 10.</span>
-<span class="sd">        bg_color (str, optional): Background color for the colorbar. Defaults to None.</span>
+<span class="sd">        bg_color (str, optional): Background color for the colorbar. Defaults to &quot;white&quot;.</span>
 <span class="sd">        orientation (str, optional): Orientation of the colorbar, such as &quot;vertical&quot; and &quot;horizontal&quot;. Defaults to &quot;horizontal&quot;.</span>
-<span class="sd">        dpi (float | str, optional): The resolution in dots per inch.  If &#39;figure&#39;, use the figure&#39;s dpi value.. Defaults to &quot;figure&quot;.</span>
+<span class="sd">        dpi (float | str, optional): The resolution in dots per inch.  If &#39;figure&#39;, use the figure&#39;s dpi value. Defaults to &quot;figure&quot;.</span>
+<span class="sd">        transparent (bool, optional): Whether to make the background transparent. Defaults to False.</span>
 <span class="sd">        show_colorbar (bool, optional): Whether to show the colorbar. Defaults to True.</span>
+<span class="sd">        **kwargs: Other keyword arguments to pass to matplotlib.pyplot.savefig().</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: Path to the output image.</span>
@@ -38170,8 +38185,6 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">vis_params</span><span class="p">[</span><span class="s2">&quot;opacity&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The provided opacity value must be type scalar.&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="s2">&quot;alpha&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -38210,7 +38223,16 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
     <span class="k">if</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">label_size</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">label_weight</span><span class="p">)</span>
     <span class="n">cb</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">tick_size</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out_fig</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">bg_color</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">transparent</span><span class="p">:</span>
+        <span class="n">bg_color</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">bg_color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;facecolor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bg_color</span>
+    <span class="k">if</span> <span class="s2">&quot;bbox_inches&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;bbox_inches&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out_fig</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="n">transparent</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">show_colorbar</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">out_fig</span>
