@@ -5661,7 +5661,8 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
                         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
                             <span class="n">opacity</span> <span class="o">=</span> <span class="mf">1.0</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">opacity</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">opacity</span>
+                        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">):</span>
+                            <span class="n">opacity</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">opacity</span>
 
                     <span class="n">layer_opacity</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FloatSlider</span><span class="p">(</span>
                         <span class="n">value</span><span class="o">=</span><span class="n">opacity</span><span class="p">,</span>
@@ -5749,7 +5750,7 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 
                     <span class="k">if</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">geojson_layers</span><span class="p">:</span>
                         <span class="n">layer_opacity</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">layer_opacity_changed</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
+                    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">):</span>
                         <span class="n">widgets</span><span class="o">.</span><span class="n">jsdlink</span><span class="p">((</span><span class="n">layer_opacity</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span> <span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">))</span>
                     <span class="n">hbox</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">HBox</span><span class="p">(</span>
                         <span class="p">[</span><span class="n">layer_chk</span><span class="p">,</span> <span class="n">layer_settings</span><span class="p">,</span> <span class="n">layer_opacity</span><span class="p">],</span>
