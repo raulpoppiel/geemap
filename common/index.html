@@ -1693,6 +1693,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#geemap.common.get_current_year" class="md-nav__link">
+    get_current_year()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#geemap.common.get_direct_url" class="md-nav__link">
     get_direct_url()
   </a>
@@ -6149,6 +6156,13 @@
         <li class="md-nav__item">
   <a href="#geemap.common.get_current_latlon" class="md-nav__link">
     get_current_latlon()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#geemap.common.get_current_year" class="md-nav__link">
+    get_current_year()
   </a>
   
 </li>
@@ -25974,6 +25988,53 @@ Source code adapted from https://github.com/mapbox/rasterio/blob/master/rasterio
     <span class="n">lat</span> <span class="o">=</span> <span class="n">props</span><span class="p">[</span><span class="s2">&quot;lat&quot;</span><span class="p">]</span>
     <span class="n">lon</span> <span class="o">=</span> <span class="n">props</span><span class="p">[</span><span class="s2">&quot;lng&quot;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h2 id="geemap.common.get_current_year" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_current_year</span><span class="p">()</span></code>
+
+
+<a href="#geemap.common.get_current_year" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Get the current year.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>int</code></td>
+      <td><p>The current year.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>geemap/common.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_current_year</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current year.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: The current year.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">today</span><span class="o">.</span><span class="n">year</span>
 </code></pre></div>
         </details>
     </div>
