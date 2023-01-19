@@ -4765,6 +4765,7 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">tool_output_ctrl</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layer_control</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convert_ctrl</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolbar_ctrl</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_expand_point</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_expand_pixels</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_expand_objects</span> <span class="o">=</span> <span class="kc">False</span>
@@ -5770,6 +5771,7 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 
         <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;toolbar_ctrl&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_control</span><span class="p">(</span><span class="n">toolbar_control</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">toolbar_ctrl</span> <span class="o">=</span> <span class="n">toolbar_control</span>
 
         <span class="n">tool_output_control</span> <span class="o">=</span> <span class="n">ipyleaflet</span><span class="o">.</span><span class="n">WidgetControl</span><span class="p">(</span>
             <span class="n">widget</span><span class="o">=</span><span class="n">tool_output</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="s2">&quot;topright&quot;</span>
@@ -6985,6 +6987,7 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
         <span class="n">right_layer</span><span class="o">=</span><span class="s2">&quot;ROADMAP&quot;</span><span class="p">,</span>
         <span class="n">zoom_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">fullscreen_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">layer_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">add_close_button</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">left_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">right_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -7000,6 +7003,7 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 <span class="sd">            right_layer (str, optional): The right tile layer. Defaults to &#39;ROADMAP&#39;.</span>
 <span class="sd">            zoom_control (bool, optional): Whether to show the zoom control. Defaults to True.</span>
 <span class="sd">            fullscreen_control (bool, optional): Whether to show the full screen control. Defaults to True.</span>
+<span class="sd">            layer_control (bool, optional): Whether to show the layer control. Defaults to True.</span>
 <span class="sd">            add_close_button (bool, optional): Whether to add a close button. Defaults to False.</span>
 <span class="sd">            left_label (str, optional): The label for the left map. Defaults to None.</span>
 <span class="sd">            right_label (str, optional): The label for the right map. Defaults to None.</span>
@@ -7135,6 +7139,9 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
 
             <span class="k">if</span> <span class="n">add_close_button</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_control</span><span class="p">(</span><span class="n">close_control</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">layer_control</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addLayerControl</span><span class="p">()</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The provided layers are invalid!&quot;</span><span class="p">)</span>
@@ -24081,7 +24088,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 
 
 <h3 id="geemap.geemap.Map.split_map" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">split_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left_layer</span><span class="o">=</span><span class="s1">&#39;HYBRID&#39;</span><span class="p">,</span> <span class="n">right_layer</span><span class="o">=</span><span class="s1">&#39;ROADMAP&#39;</span><span class="p">,</span> <span class="n">zoom_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fullscreen_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_close_button</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">left_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">left_position</span><span class="o">=</span><span class="s1">&#39;bottomleft&#39;</span><span class="p">,</span> <span class="n">right_position</span><span class="o">=</span><span class="s1">&#39;bottomright&#39;</span><span class="p">,</span> <span class="n">widget_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">split_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left_layer</span><span class="o">=</span><span class="s1">&#39;HYBRID&#39;</span><span class="p">,</span> <span class="n">right_layer</span><span class="o">=</span><span class="s1">&#39;ROADMAP&#39;</span><span class="p">,</span> <span class="n">zoom_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fullscreen_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layer_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_close_button</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">left_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">left_position</span><span class="o">=</span><span class="s1">&#39;bottomleft&#39;</span><span class="p">,</span> <span class="n">right_position</span><span class="o">=</span><span class="s1">&#39;bottomright&#39;</span><span class="p">,</span> <span class="n">widget_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.geemap.Map.split_map" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -24123,6 +24130,12 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
         <td><code>fullscreen_control</code></td>
         <td><code>bool</code></td>
         <td><p>Whether to show the full screen control. Defaults to True.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>layer_control</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to show the layer control. Defaults to True.</p></td>
         <td><code>True</code></td>
       </tr>
       <tr>
@@ -24177,6 +24190,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
     <span class="n">right_layer</span><span class="o">=</span><span class="s2">&quot;ROADMAP&quot;</span><span class="p">,</span>
     <span class="n">zoom_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">fullscreen_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">layer_control</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">add_close_button</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">left_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">right_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -24192,6 +24206,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 <span class="sd">        right_layer (str, optional): The right tile layer. Defaults to &#39;ROADMAP&#39;.</span>
 <span class="sd">        zoom_control (bool, optional): Whether to show the zoom control. Defaults to True.</span>
 <span class="sd">        fullscreen_control (bool, optional): Whether to show the full screen control. Defaults to True.</span>
+<span class="sd">        layer_control (bool, optional): Whether to show the layer control. Defaults to True.</span>
 <span class="sd">        add_close_button (bool, optional): Whether to add a close button. Defaults to False.</span>
 <span class="sd">        left_label (str, optional): The label for the left map. Defaults to None.</span>
 <span class="sd">        right_label (str, optional): The label for the right map. Defaults to None.</span>
@@ -24327,6 +24342,9 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = &#39;proxy/{port}&#39;
 
         <span class="k">if</span> <span class="n">add_close_button</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add_control</span><span class="p">(</span><span class="n">close_control</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">layer_control</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addLayerControl</span><span class="p">()</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The provided layers are invalid!&quot;</span><span class="p">)</span>
