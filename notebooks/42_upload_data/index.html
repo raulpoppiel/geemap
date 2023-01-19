@@ -4261,8 +4261,8 @@ reset = widgets.Button(
 
     <span class="k">try</span><span class="p">:</span>
         <span class="p">[</span><span class="n">uploaded_file</span><span class="p">]</span> <span class="o">=</span> <span class="n">upload_widget</span><span class="o">.</span><span class="n">value</span>
-        <span class="n">file</span> <span class="o">=</span> <span class="n">upload_widget</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">uploaded_file</span><span class="p">]</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="n">upload_widget</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
         <span class="n">out_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_file</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
@@ -4305,8 +4305,8 @@ reset = widgets.Button(
 
     try:
         [uploaded_file] = upload_widget.value
-        file = upload_widget.value[uploaded_file]
-        name = file['metadata']['name']
+        file = upload_widget.value[0]
+        name = file['name']
         content = file['content']
         out_file = os.path.join(out_dir, name)
         with open(out_file, "wb") as fp:
@@ -4364,15 +4364,14 @@ reset = widgets.Button(
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="k">def</span> <span class="nf">submit_clicked</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">uploader</span><span class="o">.</span><span class="n">_counter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uploader</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">Map</span><span class="o">.</span><span class="n">default_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cursor&#39;</span><span class="p">:</span> <span class="s1">&#39;wait&#39;</span><span class="p">}</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">fc</span> <span class="o">=</span> <span class="n">get_vector</span><span class="p">(</span><span class="n">uploader</span><span class="p">)</span>
             <span class="n">layer_name</span> <span class="o">=</span> <span class="s1">&#39;Layer &#39;</span> <span class="o">+</span> <span class="n">geemap</span><span class="o">.</span><span class="n">random_string</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
             <span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="p">{},</span> <span class="n">layer_name</span><span class="p">)</span>
             <span class="n">Map</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
-            <span class="n">uploader</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-            <span class="n">uploader</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">uploader</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="p">()</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
         <span class="n">Map</span><span class="o">.</span><span class="n">default_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cursor&#39;</span><span class="p">:</span> <span class="s1">&#39;pointer&#39;</span><span class="p">}</span>
@@ -4390,22 +4389,19 @@ reset = widgets.Button(
         <span class="n">display</span><span class="p">(</span><span class="n">uploader</span><span class="p">)</span>
         <span class="n">display</span><span class="p">(</span><span class="n">submit</span><span class="p">)</span>
         <span class="n">display</span><span class="p">(</span><span class="n">reset</span><span class="p">)</span>
-    <span class="n">uploader</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">uploader</span><span class="o">.</span><span class="n">_counter</span> <span class="o">=</span> <span class="mi">0</span>
-
+    <span class="n">uploader</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="p">()</span>
 
 <span class="n">reset</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">reset_clicked</span><span class="p">)</span>
 </pre></div>
 <div id="cell-9" class="clipboard-copy-txt">def submit_clicked(b):
-    if uploader._counter > 0:
+    if len(uploader.value) > 0:
         Map.default_style = {'cursor': 'wait'}
         try:
             fc = get_vector(uploader)
             layer_name = 'Layer ' + geemap.random_string(3)
             Map.addLayer(fc, {}, layer_name)
             Map.centerObject(fc)
-            uploader.value.clear()
-            uploader._counter = 0
+            uploader.value = ()
         except Exception as e:
             print(e)
         Map.default_style = {'cursor': 'pointer'}
@@ -4423,9 +4419,7 @@ def reset_clicked(b):
         display(uploader)
         display(submit)
         display(reset)
-    uploader.value.clear()
-    uploader._counter = 0
-
+    uploader.value = ()
 
 reset.on_click(reset_clicked)</div>
     
@@ -4446,7 +4440,7 @@ reset.on_click(reset_clicked)</div>
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2022-07-09T23:22:02+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2022-07-09</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2023-01-19T15:25:40+00:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2023-01-19</span>
       
         <br>
         Created:
