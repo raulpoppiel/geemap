@@ -4878,6 +4878,9 @@ Map            (<span title="ipyleaflet.leaflet.Map">Map</span>)
                 <span class="n">create_code_cell</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
                 <span class="k">with</span> <span class="n">search_output</span><span class="p">:</span>
                     <span class="n">search_output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;# The code has been copied to the clipboard. </span><span class="se">\n</span><span class="s2"># Press Ctrl+V in a new cell to paste it.&quot;</span>
+                    <span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
 
         <span class="n">import_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">import_btn_clicked</span><span class="p">)</span>
