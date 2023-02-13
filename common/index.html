@@ -30552,7 +30552,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
         <td><code>collection</code></td>
         <td><code>ee.ImageCollection</code></td>
         <td><p>The image collection of JRC surface water monthly history.
-Default to ee.ImageCollection('JRC/GSW1_3/MonthlyHistory')</p></td>
+Default to ee.ImageCollection('JRC/GSW1_4/MonthlyHistory')</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
@@ -30648,7 +30648,7 @@ Default to ee.ImageCollection('JRC/GSW1_3/MonthlyHistory')</p></td>
       <tr>
         <td><code>return_df</code></td>
         <td><code>bool</code></td>
-        <td><p><em>description</em>. Defaults to False.</p></td>
+        <td><p>Whether to return the dataframe of the plot. Defaults to False.</p></td>
         <td><code>False</code></td>
       </tr>
   </tbody>
@@ -30694,7 +30694,7 @@ Default to ee.ImageCollection('JRC/GSW1_3/MonthlyHistory')</p></td>
 
 <span class="sd">    Args:</span>
 <span class="sd">        collection (ee.ImageCollection, optional): The image collection of JRC surface water monthly history.</span>
-<span class="sd">            Default to ee.ImageCollection(&#39;JRC/GSW1_3/MonthlyHistory&#39;)</span>
+<span class="sd">            Default to ee.ImageCollection(&#39;JRC/GSW1_4/MonthlyHistory&#39;)</span>
 <span class="sd">        region (ee.Geometry | ee.FeatureCollection, optional): The region to plot. Default to None.</span>
 <span class="sd">        start_date (str, optional): The start date of the plot. Default to &#39;1984-03-16&#39;.</span>
 <span class="sd">        end_date (str, optional): The end date of the plot. Default to the current date.</span>
@@ -30710,7 +30710,7 @@ Default to ee.ImageCollection('JRC/GSW1_3/MonthlyHistory')</p></td>
 <span class="sd">        width (int, optional): Width of the plot in pixels. Defaults to None.</span>
 <span class="sd">        height (int, optional): Height of the plot in pixels. Defaults to 500.</span>
 <span class="sd">        layout_args (dict, optional): Layout arguments for the plot to be passed to fig.update_layout(),</span>
-<span class="sd">        return_df (bool, optional): _description_. Defaults to False.</span>
+<span class="sd">        return_df (bool, optional): Whether to return the dataframe of the plot. Defaults to False.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        pd.DataFrame: Pandas dataframe of the plot.</span>
@@ -30724,7 +30724,7 @@ Default to ee.ImageCollection('JRC/GSW1_3/MonthlyHistory')</p></td>
         <span class="n">end_date</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">collection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">collection</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;JRC/GSW1_3/MonthlyHistory&quot;</span><span class="p">)</span>
+        <span class="n">collection</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;JRC/GSW1_4/MonthlyHistory&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">frequency</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;frequency must be &#39;year&#39; or &#39;month&#39;.&quot;</span><span class="p">)</span>
