@@ -2947,6 +2947,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../notebooks/133_gradio/" class="md-nav__link">
+        133 gradio
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -3534,7 +3548,6 @@
     <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;description_width&quot;</span><span class="p">:</span> <span class="s2">&quot;initial&quot;</span><span class="p">}</span>
 
     <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
         <span class="n">marker_cluster</span> <span class="o">=</span> <span class="n">ipyleaflet</span><span class="o">.</span><span class="n">MarkerCluster</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Inspector Markers&quot;</span><span class="p">)</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;pixel_values&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="nb">setattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;marker_cluster&quot;</span><span class="p">,</span> <span class="n">marker_cluster</span><span class="p">)</span>
@@ -3656,7 +3669,6 @@
     <span class="n">bands_chk</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">chk_change</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_toolbar_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">:</span>
             <span class="n">toolbar_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">toolbar_header</span><span class="p">,</span> <span class="n">toolbar_footer</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">:</span>
@@ -3878,7 +3890,6 @@
         <span class="n">m</span><span class="o">.</span><span class="n">add_layer</span><span class="p">(</span><span class="n">marker_cluster</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="o">.</span><span class="n">interact_mode</span><span class="p">:</span>
-
             <span class="n">m</span><span class="o">.</span><span class="n">on_interaction</span><span class="p">(</span><span class="n">handle_interaction</span><span class="p">)</span>
             <span class="n">m</span><span class="o">.</span><span class="n">interact_mode</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -4106,7 +4117,6 @@
     <span class="n">bands</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">bands_changed</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">chooser_callback</span><span class="p">(</span><span class="n">chooser</span><span class="p">):</span>
-
         <span class="n">filepath</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">file_chooser</span><span class="o">.</span><span class="n">selected</span>
 
         <span class="k">if</span> <span class="n">file_type</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;CSV&quot;</span><span class="p">:</span>
@@ -4538,7 +4548,6 @@
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_toolbar_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">:</span>
             <span class="n">toolbar_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">toolbar_header</span><span class="p">,</span> <span class="n">toolbar_footer</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">:</span>
@@ -4714,7 +4723,6 @@
     <span class="n">canvas</span><span class="o">.</span><span class="n">toolbar</span> <span class="o">=</span> <span class="n">toolbar_grid</span>
 
     <span class="k">def</span> <span class="nf">tool_callback</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
             <span class="n">current_tool</span> <span class="o">=</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="n">toolbar_grid</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
@@ -4774,7 +4782,6 @@
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_toolbar_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">:</span>
             <span class="n">toolbar_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">toolbar_header</span><span class="p">,</span> <span class="n">toolbar_footer</span><span class="p">]</span>
             <span class="c1"># map_widget.layout.width = &quot;85%&quot;</span>
@@ -4810,7 +4817,6 @@
 
     <span class="k">def</span> <span class="nf">layers_btn_click</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
-
             <span class="n">layer_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">get_layers</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="n">layers_hbox</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">all_layers_chk</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span>
@@ -4867,7 +4873,6 @@
                 <span class="p">)</span>
 
                 <span class="k">def</span> <span class="nf">layer_chk_change</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
-
                     <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
                         <span class="n">m</span><span class="o">.</span><span class="n">set_layer_visibility</span><span class="p">(</span><span class="n">change</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
@@ -5207,7 +5212,6 @@
         <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
             <span class="n">selected</span> <span class="o">=</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
             <span class="k">if</span> <span class="n">colormap</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
                 <span class="n">n_class</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">if</span> <span class="n">selected</span> <span class="o">!=</span> <span class="s2">&quot;Any&quot;</span><span class="p">:</span>
                     <span class="n">n_class</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">classes</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -5289,7 +5293,6 @@
 
     <span class="k">def</span> <span class="nf">colormap_changed</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
-
             <span class="n">n_class</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">classes</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="s2">&quot;Any&quot;</span><span class="p">:</span>
                 <span class="n">n_class</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">classes</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
@@ -5381,9 +5384,7 @@
 
     <span class="k">def</span> <span class="nf">year_change</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
-
             <span class="k">if</span> <span class="n">collection</span><span class="o">.</span><span class="n">value</span> <span class="o">!=</span> <span class="s2">&quot;MOD13A2.006 Terra Vegetation Indices&quot;</span><span class="p">:</span>
-
                 <span class="n">labels</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start_year</span><span class="o">.</span><span class="n">value</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">end_year</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -5459,7 +5460,6 @@
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">submit_clicked</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
-
         <span class="n">output</span><span class="o">.</span><span class="n">clear_output</span><span class="p">()</span>
         <span class="k">with</span> <span class="n">output</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">start_year</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">end_year</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
@@ -5470,7 +5470,6 @@
                 <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
             <span class="n">roi</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">region</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;User-drawn ROI&quot;</span> <span class="ow">and</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">user_roi</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
                 <span class="n">roi</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">user_roi</span>
@@ -5562,7 +5561,6 @@
                         <span class="n">cloud</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                     <span class="p">)</span>
                 <span class="k">elif</span> <span class="n">collection</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;USDA NAIP Imagery&quot;</span><span class="p">:</span>
-
                     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">start_year</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2009</span> <span class="ow">and</span> <span class="p">(</span>
                         <span class="n">band1_dropdown</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;N&quot;</span>
                         <span class="ow">or</span> <span class="n">band2_dropdown</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="s2">&quot;N&quot;</span>
@@ -5634,7 +5632,6 @@
     <span class="n">close_btn</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">close_click</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">collection_changed</span><span class="p">(</span><span class="n">change</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">]:</span>
             <span class="n">selected</span> <span class="o">=</span> <span class="n">change</span><span class="p">[</span><span class="s2">&quot;owner&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
             <span class="k">if</span> <span class="n">selected</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">ee_layer_dict</span><span class="p">:</span>
@@ -5654,7 +5651,6 @@
                     <span class="n">bands_hbox</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[]</span>
 
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ee_object</span><span class="p">,</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">):</span>
-
                     <span class="n">first</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">ee_object</span><span class="o">.</span><span class="n">first</span><span class="p">())</span>
                     <span class="n">band_names</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">()</span>
                     <span class="n">band_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">band_names</span><span class="p">)</span>
@@ -5813,7 +5809,6 @@
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_toolbar_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">:</span>
             <span class="n">toolbar_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">toolbar_header</span><span class="p">,</span> <span class="n">toolbar_footer</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">:</span>
@@ -6188,7 +6183,6 @@
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">submit_clicked</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">start_year</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">end_year</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The end year must be great than the start year.&quot;</span><span class="p">)</span>
             <span class="k">return</span>
@@ -6213,7 +6207,6 @@
         <span class="n">temp_output</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Output</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
             <span class="n">out_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/Downloads&quot;</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">out_dir</span><span class="p">):</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span>
@@ -6316,7 +6309,6 @@
     <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">handle_toolbar_event</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseenter&quot;</span><span class="p">:</span>
             <span class="n">toolbar_widget</span><span class="o">.</span><span class="n">children</span> <span class="o">=</span> <span class="p">[</span><span class="n">toolbar_header</span><span class="p">,</span> <span class="n">toolbar_footer</span><span class="p">]</span>
         <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mouseleave&quot;</span><span class="p">:</span>
@@ -6490,7 +6482,6 @@
         <span class="n">required_params</span> <span class="o">=</span> <span class="n">required_inputs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">args2</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-
             <span class="n">line</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">arg</span><span class="p">],</span> <span class="n">FileChooser</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">required_params</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span><span class="o">.</span><span class="n">selected</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
