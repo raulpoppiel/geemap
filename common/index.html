@@ -28116,7 +28116,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
 </table>
         <details class="quote">
           <summary>Source code in <code>geemap/common.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">html_to_gradio</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s1">&#39;500px&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">html_to_gradio</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;500px&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts the map to an HTML string that can be used in Gradio. Removes unsupported elements, such as</span>
 <span class="sd">        attribution and any code blocks containing functions. See https://github.com/gradio-app/gradio/issues/3190</span>
 
@@ -28135,7 +28135,7 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
         <span class="n">height</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">px&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">html</span>
@@ -28149,13 +28149,13 @@ os.environ[&#39;LOCALTILESERVER_CLIENT_PREFIX&#39;] = f&#39;{os.environ[&#39;JUP
             <span class="k">continue</span>
         <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;{&quot;attribution&quot;:&#39;</span><span class="p">):</span>
             <span class="k">continue</span>
-        <span class="k">elif</span> <span class="s1">&#39;on(L.Draw.Event.CREATED, function(e)&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="s2">&quot;on(L.Draw.Event.CREATED, function(e)&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">14</span><span class="p">):</span>
                 <span class="n">skipped_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="s1">&#39;L.Control.geocoder&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="s2">&quot;L.Control.geocoder&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
                 <span class="n">skipped_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="s1">&#39;function(e)&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="s2">&quot;function(e)&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Warning: The folium plotting backend does not support functions in code blocks. Please delete line </span><span class="si">{</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">.&quot;</span>
             <span class="p">)</span>
@@ -45009,7 +45009,7 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
 
 
 <h2 id="geemap.common.zonal_statistics_by_group" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">zonal_statistics_by_group</span><span class="p">(</span><span class="n">in_value_raster</span><span class="p">,</span> <span class="n">in_zone_vector</span><span class="p">,</span> <span class="n">out_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">statistics_type</span><span class="o">=</span><span class="s1">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">denominator</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tile_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">return_fc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">zonal_statistics_by_group</span><span class="p">(</span><span class="n">in_value_raster</span><span class="p">,</span> <span class="n">in_zone_vector</span><span class="p">,</span> <span class="n">out_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">statistics_type</span><span class="o">=</span><span class="s1">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">denominator</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">best_effort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="mf">10000000.0</span><span class="p">,</span> <span class="n">tile_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">return_fc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.zonal_statistics_by_group" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -45078,6 +45078,24 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
         <td><code>None</code></td>
       </tr>
       <tr>
+        <td><code>crs_transform</code></td>
+        <td><code>list</code></td>
+        <td><p>The list of CRS transform values. This is a row-major ordering of the 3x2 transform matrix. This option is mutually exclusive with 'scale', and replaces any transform already set on the projection.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>best_effort</code></td>
+        <td><code>bool</code></td>
+        <td><p>If the polygon would contain too many pixels at the given scale, compute and use a larger scale which would allow the operation to succeed.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>max_pixels</code></td>
+        <td><code>int</code></td>
+        <td><p>The maximum number of pixels to reduce. Defaults to 1e7.</p></td>
+        <td><code>10000000.0</code></td>
+      </tr>
+      <tr>
         <td><code>tile_scale</code></td>
         <td><code>float</code></td>
         <td><p>A scaling factor used to reduce aggregation tile size; using a larger tileScale (e.g. 2 or 4) may enable computations that run out of memory with the default. Defaults to 1.0.</p></td>
@@ -45120,6 +45138,9 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
     <span class="n">denominator</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">crs_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">best_effort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_pixels</span><span class="o">=</span><span class="mf">1e7</span><span class="p">,</span>
     <span class="n">tile_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">return_fc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -45138,6 +45159,9 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
 <span class="sd">        denominator (float, optional): To convert area units (e.g., from square meters to square kilometers). Defaults to 1.0.</span>
 <span class="sd">        scale (float, optional): A nominal scale in meters of the projection to work in. Defaults to None.</span>
 <span class="sd">        crs (str, optional): The projection to work in. If unspecified, the projection of the image&#39;s first band is used. If specified in addition to scale, rescaled to the specified scale. Defaults to None.</span>
+<span class="sd">        crs_transform (list, optional): The list of CRS transform values. This is a row-major ordering of the 3x2 transform matrix. This option is mutually exclusive with &#39;scale&#39;, and replaces any transform already set on the projection.</span>
+<span class="sd">        best_effort (bool, optional): If the polygon would contain too many pixels at the given scale, compute and use a larger scale which would allow the operation to succeed.</span>
+<span class="sd">        max_pixels (int, optional): The maximum number of pixels to reduce. Defaults to 1e7.</span>
 <span class="sd">        tile_scale (float, optional): A scaling factor used to reduce aggregation tile size; using a larger tileScale (e.g. 2 or 4) may enable computations that run out of memory with the default. Defaults to 1.0.</span>
 <span class="sd">        verbose (bool, optional): Whether to print descriptive text when the programming is running. Default to True.</span>
 <span class="sd">        return_fc (bool, optional): Whether to return the results as an ee.FeatureCollection. Defaults to False.</span>
@@ -45213,10 +45237,12 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
         <span class="n">hist</span> <span class="o">=</span> <span class="n">in_value_raster</span><span class="o">.</span><span class="n">reduceRegion</span><span class="p">(</span>
             <span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">frequencyHistogram</span><span class="p">(),</span>
             <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
-            <span class="n">bestEffort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
             <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-            <span class="n">tile_scale</span><span class="o">=</span><span class="n">tile_scale</span><span class="p">,</span>
+            <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
+            <span class="n">crsTransform</span><span class="o">=</span><span class="n">crs_transform</span><span class="p">,</span>
+            <span class="n">bestEffort</span><span class="o">=</span><span class="n">best_effort</span><span class="p">,</span>
+            <span class="n">maxPixels</span><span class="o">=</span><span class="n">max_pixels</span><span class="p">,</span>
+            <span class="n">tileScale</span><span class="o">=</span><span class="n">tile_scale</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">class_values</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">ee</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">band_name</span><span class="p">))</span>
@@ -45556,7 +45582,7 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
 
 
 <h2 id="geemap.common.zonal_stats_by_group" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">zonal_stats_by_group</span><span class="p">(</span><span class="n">in_value_raster</span><span class="p">,</span> <span class="n">in_zone_vector</span><span class="p">,</span> <span class="n">out_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">statistics_type</span><span class="o">=</span><span class="s1">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">denominator</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tile_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">return_fc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">zonal_stats_by_group</span><span class="p">(</span><span class="n">in_value_raster</span><span class="p">,</span> <span class="n">in_zone_vector</span><span class="p">,</span> <span class="n">out_file_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">statistics_type</span><span class="o">=</span><span class="s1">&#39;SUM&#39;</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">denominator</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">crs_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">best_effort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_pixels</span><span class="o">=</span><span class="mf">10000000.0</span><span class="p">,</span> <span class="n">tile_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">return_fc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 <a href="#geemap.common.zonal_stats_by_group" class="headerlink" title="Permanent link">&para;</a></h2>
@@ -45625,6 +45651,24 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
         <td><code>None</code></td>
       </tr>
       <tr>
+        <td><code>crs_transform</code></td>
+        <td><code>list</code></td>
+        <td><p>The list of CRS transform values. This is a row-major ordering of the 3x2 transform matrix. This option is mutually exclusive with 'scale', and replaces any transform already set on the projection.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>best_effort</code></td>
+        <td><code>bool</code></td>
+        <td><p>If the polygon would contain too many pixels at the given scale, compute and use a larger scale which would allow the operation to succeed.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>max_pixels</code></td>
+        <td><code>int</code></td>
+        <td><p>The maximum number of pixels to reduce. Defaults to 1e7.</p></td>
+        <td><code>10000000.0</code></td>
+      </tr>
+      <tr>
         <td><code>tile_scale</code></td>
         <td><code>float</code></td>
         <td><p>A scaling factor used to reduce aggregation tile size; using a larger tileScale (e.g. 2 or 4) may enable computations that run out of memory with the default. Defaults to 1.0.</p></td>
@@ -45667,6 +45711,9 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
     <span class="n">denominator</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">crs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">crs_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">best_effort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_pixels</span><span class="o">=</span><span class="mf">1e7</span><span class="p">,</span>
     <span class="n">tile_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">return_fc</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -45685,6 +45732,9 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
 <span class="sd">        denominator (float, optional): To convert area units (e.g., from square meters to square kilometers). Defaults to 1.0.</span>
 <span class="sd">        scale (float, optional): A nominal scale in meters of the projection to work in. Defaults to None.</span>
 <span class="sd">        crs (str, optional): The projection to work in. If unspecified, the projection of the image&#39;s first band is used. If specified in addition to scale, rescaled to the specified scale. Defaults to None.</span>
+<span class="sd">        crs_transform (list, optional): The list of CRS transform values. This is a row-major ordering of the 3x2 transform matrix. This option is mutually exclusive with &#39;scale&#39;, and replaces any transform already set on the projection.</span>
+<span class="sd">        best_effort (bool, optional): If the polygon would contain too many pixels at the given scale, compute and use a larger scale which would allow the operation to succeed.</span>
+<span class="sd">        max_pixels (int, optional): The maximum number of pixels to reduce. Defaults to 1e7.</span>
 <span class="sd">        tile_scale (float, optional): A scaling factor used to reduce aggregation tile size; using a larger tileScale (e.g. 2 or 4) may enable computations that run out of memory with the default. Defaults to 1.0.</span>
 <span class="sd">        verbose (bool, optional): Whether to print descriptive text when the programming is running. Default to True.</span>
 <span class="sd">        return_fc (bool, optional): Whether to return the results as an ee.FeatureCollection. Defaults to False.</span>
@@ -45760,10 +45810,12 @@ such as https://developers.google.com/earth-engine/datasets/catalog/MODIS_051_MC
         <span class="n">hist</span> <span class="o">=</span> <span class="n">in_value_raster</span><span class="o">.</span><span class="n">reduceRegion</span><span class="p">(</span>
             <span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">frequencyHistogram</span><span class="p">(),</span>
             <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
-            <span class="n">bestEffort</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
             <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
-            <span class="n">tile_scale</span><span class="o">=</span><span class="n">tile_scale</span><span class="p">,</span>
+            <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">,</span>
+            <span class="n">crsTransform</span><span class="o">=</span><span class="n">crs_transform</span><span class="p">,</span>
+            <span class="n">bestEffort</span><span class="o">=</span><span class="n">best_effort</span><span class="p">,</span>
+            <span class="n">maxPixels</span><span class="o">=</span><span class="n">max_pixels</span><span class="p">,</span>
+            <span class="n">tileScale</span><span class="o">=</span><span class="n">tile_scale</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">class_values</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">ee</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">hist</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">band_name</span><span class="p">))</span>
